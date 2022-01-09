@@ -21,12 +21,7 @@ package deep.in.spring.cloud;
  */
 public class RibbonRequestContextHolder {
 
-    private static ThreadLocal<RibbonRequestContext> holder = new ThreadLocal<RibbonRequestContext>() {
-        @Override
-        protected RibbonRequestContext initialValue() {
-            return new RibbonRequestContext();
-        }
-    };
+    private static ThreadLocal<RibbonRequestContext> holder = ThreadLocal.withInitial(RibbonRequestContext::new);
 
     public static RibbonRequestContext getCurrentContext() {
         return holder.get();
